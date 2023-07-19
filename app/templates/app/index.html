@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %}
+
+{% block pagetitle %}My Shop{% endblock %}
+
+{% block userStatus %}
+    <a class="btn btn-outline-success" href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+
+{% block content %}
+
+    <div>This is a dashboard page</div>
+
+{% endblock %}
