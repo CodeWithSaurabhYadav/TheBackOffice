@@ -36,14 +36,14 @@
     <li class="list-group-item d-flex flex-row justify-content-between">
         <div class="container">
             <div class="row">
-                <div class="col">
-                    {{ product.name }}
+                <div class="col" data-toggle="modal" data-target="#viewProductModel" data-product-id="{{ product.id }}" id="ProductName">
+                    <span class="cursor-pointer">{{ product.name }}</span>
                 </div>
                 <div class="col">
-                    {{ product.quantity }}
+                    <span>{{ product.quantity }}</span>
                 </div>
                 <div class="col">
-                    {{ product.price }}
+                    <span>{{ product.price }}</span>
                 </div>
             </div>
         </div>
@@ -128,14 +128,44 @@
     </div>
 </div>
 
-<!-- Product Details Modal -->
-<div id="product-details-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2 id="product-details-name"></h2>
-        <p id="product-details-description"></p>
+<!-- Model for viewing product details-->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="viewProductModel" aria-hidden="true" id="viewProductModel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="view-product-form">
+                    {% csrf_token %}
+                    <fieldset disabled id="viewFieldset">
+                        <input type="hidden" id="PIdV" data-product-id="">
+                        <div class="form-group">
+                            <label for="PNameV" class="col-form-label">Product name:</label>
+                            <input type="text" class="form-control" id="PNameV" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="PQuantityV" class="col-form-label">Quantity:</label>
+                            <input type="number" class="form-control" id="PQuantityV" name="quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="PPriceV" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="PPriceV" name="price">
+                        </div>
+                    </fieldset>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close [ESC]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/static/js/script.js"></script>

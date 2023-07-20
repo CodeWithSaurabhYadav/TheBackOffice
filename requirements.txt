@@ -1,0 +1,5 @@
+#!/usr/bin/python3-pip
+django
+psycopg2-binary  
+djangorestframework
+django-bootstrap4

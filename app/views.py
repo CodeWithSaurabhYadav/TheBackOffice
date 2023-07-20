@@ -17,7 +17,7 @@ from rest_framework.response import Response
 def index(request):
     if request.user.is_authenticated:
         if request.session.session_key:  # Check if session exists
-            object = Product.objects.all()
+            object = Product.objects.all().order_by('id')
             context = {
                 'object': object
             }

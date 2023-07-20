@@ -191,10 +191,40 @@ $(document).ready(function () {
             },
             success: function (data) {
                 // Populate the modal form fields with the product details
-                $('#updateProductModel').find('#PIdU').val(productId);
-                $('#updateProductModel').find('#PNameU').val(data.name);
-                $('#updateProductModel').find('#PQuantityU').val(data.quantity);
-                $('#updateProductModel').find('#PPriceU').val(data.price);
+                $('#PIdU').val(productId);
+                $('#PNameU').val(data.name);
+                $('#PQuantityU').val(data.quantity);
+                $('#PPriceU').val(data.price);
+            },
+            error: function () {
+                alert('Error fetching product details');
+            }
+        });
+    });
+    
+    // Function to handle the "Edit" button click
+    $('ul').on('click', '#ProductName', function () {
+        // const productId = $(this).data('id');
+
+        const productId = $(this).data('product-id');
+        console.log(productId)
+
+        // Fetch the product details from the API using the product ID
+        $.ajax({
+            type: 'GET',
+            url: `/api/getData/${productId}/`,
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Authorization': `Bearer ${getJWTToken()}`, // Implement the function to get JWT token from localStorage or cookies
+            },
+            success: function (data) {
+                console.log(data)
+                // Populate the modal form fields with the product details
+
+                $('#PIdV').val(productId);
+                $('#PNameV').val(data.name);
+                $('#PQuantityV').val(data.quantity);
+                $('#PPriceV').val(data.price);
             },
             error: function () {
                 alert('Error fetching product details');
