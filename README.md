@@ -15,9 +15,13 @@ Before running the application, make sure you have the following prerequisites i
 ### Setting Up the Environment
 
 1. Clone the repository from `https://github.com/CodeWithSaurabhYadav/TheBackOffice`.
-- ```git clone https://github.com/CodeWithSaurabhYadav/TheBackOffice```
+```
+git clone https://github.com/CodeWithSaurabhYadav/TheBackOffice
+```
 2. Navigate to the project root directory using the terminal or command prompt.
-- ```cd TheBackOffice```
+```
+cd TheBackOffice
+```
 
 ### Install Dependencies
 
