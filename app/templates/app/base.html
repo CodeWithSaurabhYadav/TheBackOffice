@@ -10,6 +10,8 @@
     <style>
         body{
             background: url(/static/assets/images/background.jpg) no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
         }
     </style>
     {% bootstrap_css %}
@@ -40,7 +42,7 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-2" style="flex:1;padding: 0 0 5rem 0;">
         {% block content %}{% endblock %}
     </div>
 

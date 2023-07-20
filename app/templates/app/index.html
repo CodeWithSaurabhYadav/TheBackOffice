@@ -36,8 +36,8 @@
     <li class="list-group-item d-flex flex-row justify-content-between">
         <div class="container">
             <div class="row">
-                <div class="col" data-toggle="modal" data-target="#viewProductModel" data-product-id="{{ product.id }}" id="ProductName">
-                    <span class="cursor-pointer">{{ product.name }}</span>
+                <div class="col" data-toggle="modal" data-target="#viewProductModel" data-product-id="{{ product.id }}" id="ProductName" style="cursor: pointer;">
+                    <span class="cursor-pointer hover:text-blue" onmouseover="this.style.color='blue';"  onmouseout="this.style.color='black';">{{ product.name }}</span>
                 </div>
                 <div class="col">
                     <span>{{ product.quantity }}</span>

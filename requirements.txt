@@ -1,5 +1,8 @@
 #!/usr/bin/python3-pip
 django
-psycopg2-binary  
+psycopg2-binary
+psycopg2
+requests
 djangorestframework
+djangorestframework-simplejwt
 django-bootstrap4
