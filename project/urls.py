@@ -27,5 +27,6 @@ urlpatterns = [
     path('', index, name='index'),
     path('login/', UserLogin, name='login'),
     path('logout/', UserLogout, name='logout'),
-    path('data/', include('api.urls')),
+    path('api/', include('api.urls')),
+    # path('product/add/', addProduct, name='add_product'),
 ]

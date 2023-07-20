@@ -3,11 +3,140 @@
 {% block pagetitle %}My Shop{% endblock %}
 
 {% block userStatus %}
-    <a class="btn btn-outline-success" href="{% url 'logout' %}">Logout</a>
+<a class="nav-link" href="{% url 'logout' %}">Logout</a>
 {% endblock %}
 
 {% block content %}
+<h1>Product List</h1>
+<div class="d-flex flex-row-reverse p-3">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addProductModel" id="addProductBtn">Add newproduct [ALT + D]</button>
+</div>
+<ul class="list-group" id="productsList">
+    <li class="list-group-item d-flex flex-row justify-content-between active">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    Item name
+                </div>
+                <div class="col">
+                    Quantity
+                </div>
+                <div class="col">
+                    Price
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse invisible ">
+            <button class="btn btn-danger mx-2" data-product-id="{{ product.id }}">Delete</button>
+            <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#updateProductModel"
+                data-product-id="{{ product.id }}">Edit</button>
+        </div>
+    </li>
+    {% for product in object %}
+    <li class="list-group-item d-flex flex-row justify-content-between">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    {{ product.name }}
+                </div>
+                <div class="col">
+                    {{ product.quantity }}
+                </div>
+                <div class="col">
+                    {{ product.price }}
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row-reverse">
+            <button class="btn btn-danger mx-2" data-product-id="{{ product.id }}" id="deleteButton">Delete</button>
+            <button type="button" class="btn btn-primary mx-2" data-toggle="modal" data-target="#updateProductModel" data-product-id="{{ product.id }}" id="editButton">Edit</button>
+        </div>
+    </li>
+    </a>
+    {% endfor %}
+</ul>
 
-    <div>This is a dashboard page</div>
 
+<!-- Model for adding new product -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addProductModel" aria-hidden="true" id="addProductModel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add new product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="add-product-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name" class="col-form-label">Product name:</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity" class="col-form-label">Quantity:</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity">
+                    </div>
+                    <div class="form-group">
+                        <label for="price" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="price" name="price">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close [ESC]</button>
+                        <button type="submit" class="btn btn-primary">Add Product [Enter]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Model for editing product -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="updateProductModel" aria-hidden="true" id="updateProductModel">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit product</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="update-product-form">
+                    {% csrf_token %}
+                    <input type="hidden" id="PIdU" data-product-id="">
+                    <div class="form-group">
+                        <label for="PNameU" class="col-form-label">Product name:</label>
+                        <input type="text" class="form-control" id="PNameU" name="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="PQuantityU" class="col-form-label">Quantity:</label>
+                        <input type="number" class="form-control" id="PQuantityU" name="quantity">
+                    </div>
+                    <div class="form-group">
+                        <label for="PPriceU" class="col-form-label">Price:</label>
+                        <input type="number" class="form-control" id="PPriceU" name="price">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close [ESC]</button>
+                        <button type="submit" class="btn btn-primary">Update [ENTER]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Details Modal -->
+<div id="product-details-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2 id="product-details-name"></h2>
+        <p id="product-details-description"></p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/static/js/script.js"></script>
 {% endblock %}

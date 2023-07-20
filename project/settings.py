@@ -25,10 +25,7 @@ SECRET_KEY = 'django-insecure-+5bgtdc+_ulcud^d%==4nfk7h=^cc_r!4)uo=!&14_$b6)f8vr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-    'rest_framework'
+    'rest_framework',
+    'bootstrap4',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app.middleware.CheckUserAuthenticationMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -70,6 +70,14 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+REST_USE_JWT = True
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
@@ -141,4 +149,7 @@ SESSION_COOKIE_HTTPONLY = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login/'  # Add this at the top of the file
 LOGIN_REDIRECT_URL = '/dashboard/'
-AUTHENTICATION_BACKENDS = ['app.backends.EmailBackend']
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'app.backends.EmailBackend',
+]
